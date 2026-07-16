@@ -1,0 +1,8 @@
+node_modules
+.next
+.git
+.env*
+beacon.db-shm
+beacon.db-wal
+app/.ipynb_checkpoints
+app/*.ipynb
