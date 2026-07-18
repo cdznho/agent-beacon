@@ -45,7 +45,6 @@ The `?ai=1` manual override requires `?key=...` when `BEACON_KEY` is set.
 ## Routes
 
 - `/worldcup` — human-facing experiment page; recognized agent requests receive a 307 redirect.
-- `/pricing` — compatibility redirect to the beacon API.
 - `/api/beacon` — machine-readable JSON response and event logger.
 
 ## Validation
