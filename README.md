@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agent Beacon
 
-## Getting Started
+Agent Beacon is a small Next.js experiment about agent-aware web responses.
+The same public page serves a human-facing HTML verdict and redirects
+recognized AI-agent requests to a machine-readable JSON endpoint.
 
-First, run the development server:
+## The experiment
+
+The human page asks:
+
+> Did FIFA favor Argentina during the 2026 World Cup?
+
+Human visitors see `YES`. Requests whose user agent matches the configured
+agent patterns are redirected from `/worldcup` to `/api/beacon`, where the
+response contains an agent-specific verdict.
+
+This is a demonstration of request-based content negotiation, not a claim
+that every AI system will browse, follow redirects, or identify itself
+consistently.
+
+## Run locally
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open <http://localhost:3000/worldcup>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The machine-readable endpoint is available at:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```text
+http://localhost:3000/api/beacon?agent=chatgpt&source=worldcup
+```
 
-## Learn More
+Optional local environment variables:
 
-To learn more about Next.js, take a look at the following resources:
+```text
+AI_AGENT_UA_PATTERNS=Perplexity,ChatGPT-User,GPTBot
+BEACON_KEY=optional-key-for-the-manual-ai-override
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The `?ai=1` manual override requires `?key=...` when `BEACON_KEY` is set.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Routes
 
-## Deploy on Vercel
+- `/worldcup` — human-facing experiment page; recognized agent requests receive a 307 redirect.
+- `/pricing` — compatibility redirect to the beacon API.
+- `/api/beacon` — machine-readable JSON response and event logger.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Validation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run build -- --no-lint
+```
+
+The app uses a local SQLite database for the demo logger. Database files are
+intentionally ignored and should not be committed. Cloud Run instances have
+ephemeral local storage, so this logger is not a durable production analytics
+store.
+
+## Privacy and limitations
+
+The API records request metadata such as user agent, source, and optional
+query/session values. Do not use this demo unchanged for sensitive traffic.
+Agent detection is based on request headers and can be absent, spoofed, or
+different across browsing tools.

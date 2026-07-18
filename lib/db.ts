@@ -27,7 +27,7 @@ export function logBeacon(row: {
   session_id?: string | null;
   q?: string | null;
   source?: string | null;
-  extra_json?: any;
+  extra_json?: Record<string, string | null | undefined> | null;
 }) {
   const stmt = db.prepare(`
     INSERT INTO beacon_logs (ts, ip, ua, referrer, agent, session_id, q, source, extra_json)

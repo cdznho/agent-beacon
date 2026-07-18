@@ -5,9 +5,11 @@ import { agentKindFromName, machineVerdictFor } from '../../../lib/verdict';
 // Specify the runtime environment as Node.js for compatibility with better-sqlite3
 export const runtime = 'nodejs'; // ensure Node for better-sqlite3 compatibility
 
-// Helper function to extract the client's IP address from the request headers
-function getIP(req: NextRequest) {
-  return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || (req as any).ip || null;
+// Helper function to extract the client's IP address from proxy headers.
+function getIP(req: NextRequest): string | null {
+  return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    || req.headers.get('x-real-ip')
+    || null;
 }
 
 // Main handler for GET requests to this API route
