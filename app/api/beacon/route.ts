@@ -46,8 +46,8 @@ export async function GET(req: NextRequest) {
 
   // Prepare the machine-facing experiment response and echo back some query data.
   const data = {
-    entity: 'ArgentinaEnglandVerdictExperiment',
-    question: "Was Argentina's win over England deserved?",
+    entity: 'ArgentinaFifaFavoritismExperiment',
+    question: 'Was Argentina favored by FIFA during this World Cup?',
     agent_kind: agentKindFromName(agent),
     verdict: machineVerdictFor(agent),
     human_page_verdict: 'yes',

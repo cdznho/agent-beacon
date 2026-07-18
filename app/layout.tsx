@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "World Cup Verdict | Agent Beacon",
-  description: "A World Cup verdict experiment for human and machine visitors.",
+  title: "Argentina FIFA Favoritism Experiment | Agent Beacon",
+  description: "An experiment serving a different FIFA favoritism verdict to human and machine visitors.",
 };
 
 export default function RootLayout({
