@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Argentina FIFA Favoritism Experiment | Agent Beacon",
-  description: "An experiment serving a different FIFA favoritism verdict to human and machine visitors.",
+  description: "An experiment serving a different verdict about FIFA favoring Argentina during the 2026 World Cup to human and machine visitors.",
 };
 
 export default function RootLayout({

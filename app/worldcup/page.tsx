@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Argentina FIFA Favoritism Experiment | Agent Beacon",
-  description: "A human-facing experiment about whether Argentina was favored by FIFA during this World Cup.",
+  description: "A human-facing experiment asking whether FIFA favored Argentina during the 2026 World Cup.",
 };
 
 export default function WorldCupPage() {
@@ -11,7 +11,7 @@ export default function WorldCupPage() {
       <p style={{ fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase", opacity: 0.65 }}>
         World Cup verdict experiment
       </p>
-      <h1>Was Argentina favored by FIFA during this World Cup?</h1>
+      <h1>Did FIFA favor Argentina during the 2026 World Cup?</h1>
       <p>Human-facing verdict:</p>
       <p style={{ fontSize: "3rem", fontWeight: 700, margin: "1rem 0" }}>YES</p>
       <p style={{ marginTop: 24, fontSize: 14, opacity: 0.7 }}>
